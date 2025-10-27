@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		205A35132EAF0C11004525AB /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 205A35122EAF0C04004525AB /* readme.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		205A35122EAF0C04004525AB /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		208F13782EAEFF100062A615 /* RockPaperScissors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RockPaperScissors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		208F136F2EAEFF100062A615 = {
 			isa = PBXGroup;
 			children = (
+				205A35122EAF0C04004525AB /* readme.md */,
 				208F137A2EAEFF100062A615 /* RockPaperScissors */,
 				208F13792EAEFF100062A615 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				205A35132EAF0C11004525AB /* readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
