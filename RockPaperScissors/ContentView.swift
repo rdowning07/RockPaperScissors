@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var roundsToWin = 3
     @State private var showingResult = false
     @State private var resultMessage = ""
+    @State private var gameEnded = false
 
     var body: some View {
         NavigationStack {
@@ -27,7 +28,7 @@ struct ContentView: View {
                         .font(.headline)
                     HStack(spacing: 40) {
                         Label("\(playerScore)", systemImage: "person.fill")
-                            .symbolEffect(.bounce, value: playerScore) // simple animation
+                            .symbolEffect(.bounce, value: playerScore)
                         Label("\(systemScore)", systemImage: "cpu.fill")
                             .symbolEffect(.bounce, value: systemScore)
                     }
@@ -83,14 +84,29 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .navigationTitle("Rock • Paper • Scissors")
-            .navigationBarTitleDisplayMode(.large)
             .toolbar {
+                // Title with lightning bolt before text
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "bolt.fill")
+                            .foregroundColor(.blue)
+                            .symbolEffect(.pulse)
+                        Text("Rock, Paper, Scissors")
+                            .font(.title2.bold())
+                    }
+                }
+
+                // Restart button
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Restart", action: resetGame)
                 }
             }
             .background(Color(.systemBackground))
+            .alert("Game Over", isPresented: $gameEnded) {
+                Button("Play Again", action: resetGame)
+            } message: {
+                Text(resultMessage)
+            }
         }
     }
 
@@ -114,11 +130,15 @@ struct ContentView: View {
     }
 
     func nextRound() {
+        // Check victory conditions
         if playerScore >= (roundsToWin + 1) / 2 {
             resultMessage = "🎉 You won the match!"
+            gameEnded = true
         } else if systemScore >= (roundsToWin + 1) / 2 {
             resultMessage = "💀 The system won!"
+            gameEnded = true
         } else {
+            // Continue to next round
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 showingResult = false
                 appChoice = Int.random(in: 0..<3)
@@ -134,6 +154,7 @@ struct ContentView: View {
         shouldWin = Bool.random()
         showingResult = false
         resultMessage = ""
+        gameEnded = false
     }
 }
 
